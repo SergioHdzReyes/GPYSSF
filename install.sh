@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+ROOT=$(pwd)
+
 command -v python >/dev/null 2>&1 || { echo >&2 "Python no esta instalado. Instale una version mayor ó igual a la 2.7\nAbortando...\n"; exit 1; }
 
 function check_python_version()
@@ -14,3 +16,13 @@ function check_python_version()
 }
 
 check_python_version
+
+python2.7 setup.py py2app
+PROGRAM_DIRECTORY="$ROOT/dist/Sync Select Files.app"
+
+if [ -d "$PROGRAM_DIRECTORY" ]; then
+    cp -R "${PROGRAM_DIRECTORY}" "/Applications"
+    echo "Programa instalado correctamente."
+else
+    echo "Ocurrio un error al buscar el programa instalado."
+fi
