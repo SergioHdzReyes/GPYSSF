@@ -26,3 +26,19 @@ if [ -d "$PROGRAM_DIRECTORY" ]; then
 else
     echo "Ocurrio un error al buscar el programa instalado."
 fi
+
+EXECUTABLE_STRING='
+open /Applications/Sync\ Select\ Files.app
+'
+
+EXECUTABLE_DIR='/usr/local/bin/ssf'
+
+if [ -r ${EXECUTABLE_DIR} ]; then
+    echo '\nNo se puede crear el ejecutable, ya existe un programa con el mismo nombre.'
+    echo 'Abortando...\n'
+    exit 1
+fi
+
+echo ${EXECUTABLE_STRING} > ${EXECUTABLE_DIR}
+chmod 755 ${EXECUTABLE_DIR}
+
