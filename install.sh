@@ -28,7 +28,7 @@ else
 fi
 
 EXECUTABLE_STRING='
-open /Applications/Sync\ Select\ Files.app
+CURRENT_DIRECTORY=$(pwd)\necho ${CURRENT_DIRECTORY}\nopen -a /Applications/Sync\ Select\ Files.app --args ${CURRENT_DIRECTORY}
 '
 
 EXECUTABLE_DIR='/usr/local/bin/ssf'

@@ -4,10 +4,16 @@ import Tkinter as tk
 from Tkinter import Tk
 from git import Repo
 import os
+import sys
+from os import system
+from platform import system as platform
 from Directories import Directories
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-print dir_path
+if len(sys.argv) > 1:
+    dir_path = sys.argv[1]
+    os.chdir(sys.argv[1])
+else:
+    dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class Application(tk.Frame):
     """Clase principal para correr la interfaz de la sincronizacion de archivos"""
@@ -22,7 +28,7 @@ class Application(tk.Frame):
         self.grid()
 
         try:
-            self.repo = Repo()
+            self.repo = Repo(dir_path)
         except Exception:
             self.set_not_repository_available()
             return
@@ -82,5 +88,9 @@ class Application(tk.Frame):
 root = Tk()
 app = Application(master=root)
 app.master.title('Sincronizar archivos')
+
+if platform() == 'Darwin':
+    system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
+
 app.mainloop()
 app.destroy()
