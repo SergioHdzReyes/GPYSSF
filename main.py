@@ -15,6 +15,7 @@ if len(sys.argv) > 1:
 else:
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
+
 class Application(tk.Frame):
     """Clase principal para correr la interfaz de la sincronizacion de archivos"""
 
@@ -22,6 +23,7 @@ class Application(tk.Frame):
     files_with_changes = []
     error_exception = ''
     dirs = None
+    checkboxes = []
 
     def __init__(self, master=None):
         tk.Frame.__init__(self, master)
@@ -71,8 +73,7 @@ class Application(tk.Frame):
 
     def draw_checkbox_files(self):
         for file in self.dirs.files_with_changes:
-            self.check = tk.Checkbutton(self, text=str(file))
-            self.check.grid()
+            self.checkboxes.append(tk.Checkbutton(self, text=str(file)).grid())
 
     def set_not_repository_available(self, message='Not repository found'):
         self.repo_info = tk.LabelFrame(self, text=message)
@@ -86,6 +87,18 @@ class Application(tk.Frame):
 
 
 root = Tk()
+
+w = 600
+h = 400
+
+#   Se obtienen las dimensiones de la pantalla
+ws = root.winfo_screenwidth()
+hs = root.winfo_screenheight()
+
+x = (ws/2) - (w/2)
+y = (hs/2) - (h/2)
+
+root.geometry('%dx%d+%d+%d' % (w, h, x, y))
 app = Application(master=root)
 app.master.title('Sincronizar archivos')
 
