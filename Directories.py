@@ -67,6 +67,6 @@ class Directories:
             return False
 
     def print_directories_list(self):
-        print ''
+        print('')
         for directory in self.directories:
-            print directory
+            print(directory)
