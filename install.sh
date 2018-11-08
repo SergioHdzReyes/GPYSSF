@@ -17,7 +17,7 @@ function check_python_version()
 
 check_python_version
 
-python2.7 setup.py py2app
+python setup.py py2app
 PROGRAM_DIRECTORY="$ROOT/dist/Sync Select Files.app"
 
 if [ -d "$PROGRAM_DIRECTORY" ]; then
